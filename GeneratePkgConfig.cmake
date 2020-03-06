@@ -3,6 +3,7 @@ function(GeneratePkgConfigFile target description)
     if(NOT pc_LIBRARY_DIR)
         set(pc_LIBRARY_DIR ${CMAKE_INSTALL_LIBDIR})
     endif()
+    
     if(WIN32)
         set(PKGCONFIG_INSTALL_DIR)
     else()
