@@ -20,3 +20,12 @@
 /tmp
 /out
 .DS_Store*
+/ProjectFiles/.vs/glew/v16
+
+*.vcxproj
+*.filters
+*.sln
+*.user
+/ProjectFiles/CMakeFiles
+/ProjectFiles/CMakeCache.txt
+/ProjectFiles/cmake_install.cmake

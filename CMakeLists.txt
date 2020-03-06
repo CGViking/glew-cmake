@@ -11,20 +11,23 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 include("GeneratePkgConfig.cmake")
 
-option(glew-cmake_BUILD_SHARED "Build the shared glew library" ON)
+option(glew-cmake_BUILD_SHARED "Build the shared glew library" OFF)
 option(glew-cmake_BUILD_STATIC "Build the static glew library" ON)
 option(glew-cmake_BUILD_SINGLE_CONTEXT "Build the single context glew library" ON)
-option(glew-cmake_BUILD_MULTI_CONTEXT "Build the multi context glew library" ON)
+option(glew-cmake_BUILD_MULTI_CONTEXT "Build the multi context glew library" OFF)
 option(USE_GLU "Use GLU" OFF)
 option(PKG_CONFIG_REPRESENTATIVE_TARGET "Generate pc file for specified target as glew. libglew_static|libglewmx_static|libglew_shared|libglewmx_shared" OFF)
 option(ONLY_LIBS "Do not build executables" OFF)
 
 file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/config/version  _VERSION_MAJOR_STRING REGEX "GLEW_MAJOR[ ]*=[ ]*[0-9]+.*")
 string(REGEX REPLACE "GLEW_MAJOR[ ]*=[ ]*([0-9]+)" "\\1" CPACK_PACKAGE_VERSION_MAJOR ${_VERSION_MAJOR_STRING})
+
 file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/config/version  _VERSION_MINOR_STRING REGEX "GLEW_MINOR[ ]*=[ ]*[0-9]+.*")
 string(REGEX REPLACE "GLEW_MINOR[ ]*=[ ]*([0-9]+)" "\\1" CPACK_PACKAGE_VERSION_MINOR ${_VERSION_MINOR_STRING})
+
 file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/config/version  _VERSION_PATCH_STRING REGEX "GLEW_MICRO[ ]*=[ ]*[0-9]+.*")
 string(REGEX REPLACE "GLEW_MICRO[ ]*=[ ]*([0-9]+)" "\\1" CPACK_PACKAGE_VERSION_PATCH ${_VERSION_PATCH_STRING})
+
 set(GLEW_VERSION ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})
 
 set(LIBGLEW_SRCS ${SRC_DIR}/glew.c)
@@ -67,7 +70,7 @@ if(glew-cmake_BUILD_STATIC)
 
 		set_target_properties(libglew_static PROPERTIES
 			OUTPUT_NAME "glew"
-			DEBUG_POSTFIX d)
+			)
 
 		target_include_directories(libglew_static PUBLIC ${INCLUDE_DIR})
 		target_compile_definitions(libglew_static PUBLIC GLEW_STATIC ${DEFINITIONS})
